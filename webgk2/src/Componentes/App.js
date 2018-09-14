@@ -1,5 +1,6 @@
 //Dependencias
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
 
 //Estilos
 import './Global/css/App.css';
@@ -13,11 +14,17 @@ import Footer from './Global/Footer'
 import items from '../data/menu'
 
 class App extends Component {
+  //Objeto PropTipes
+  static propTypes={
+    children: Proptypes.object.isRequired
+  };
+
   render() {
+    const { children } = this.props;
     return (
       <div className="App">
           <Header title="La web del arquero" items={items} />
-          <Content />
+          <Content body={children} />
           <Footer />
       </div>
     );

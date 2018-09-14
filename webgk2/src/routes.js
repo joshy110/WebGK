@@ -4,9 +4,25 @@ import { Route,Switch } from 'react-router-dom';
 
 //Componentes y Estilos
 import App from './Componentes/App';
-import Inicio from './Componentes/Crear';
+import Home from './Componentes/Home';
 import Crear from './Componentes/Crear';
 import Modificar from './Componentes/Modificar';
 import Eliminar from './Componentes/Eliminar';
 import VerProd from './Componentes/VerProd';
 import Page404 from './Componentes/Page404';
+
+//Funciones
+//Se realiza un wrap del uso del router
+const AppRoutes = () =>
+<App>
+    <Switch>
+        <Route path="/crear" component={Crear} />
+        <Route path="/modif" component={Modificar} />
+        <Route path="/elimi" component={Eliminar} />
+        <Route path="/verpr" component={VerProd} />
+        <Route path="/" component={Home} />
+        <Route  component={Page404} />
+    </Switch>
+</App>;
+
+export default AppRoutes;

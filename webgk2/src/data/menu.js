@@ -1,22 +1,22 @@
 export default [
     {
-      title: 'Inicio',
+      title: 'Home',
       url: '/'
     },
     {
       title: 'Crear',
-      url: '/Crear'
+      url: '/crear'
     },
     {
       title: 'Modificar',
-      url: '/Modificar'
+      url: '/modif'
     },
     {
       title: 'Eliminar',
-      url: '/Eliminar'
+      url: '/elimi'
     },
     {
       title: 'Ver Productos',
-      url: '/VerProd'
+      url: '/verpr'
     }
   ];
