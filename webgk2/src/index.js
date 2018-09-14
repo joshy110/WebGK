@@ -1,8 +1,14 @@
+//Dependencias
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+
+//Routers
+import AppRouters from './routes';
+
+//Estilos y componentes
 import './index.css';
 import App from './Componentes/App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
 registerServiceWorker();

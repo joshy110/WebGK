@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <Header title="WebGK" items={items} />
+          <Header title="La web del arquero" items={items} />
           <Content />
           <Footer />
       </div>

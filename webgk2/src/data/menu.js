@@ -1,18 +1,22 @@
 export default [
     {
-      title: 'Home',
+      title: 'Inicio',
       url: '/'
     },
     {
-      title: 'About Us',
-      url: '/about'
+      title: 'Crear',
+      url: '/Crear'
     },
     {
-      title: 'Contact Us',
-      url: '/contact'
+      title: 'Modificar',
+      url: '/Modificar'
     },
     {
-      title: 'Library',
-      url: '/library'
+      title: 'Eliminar',
+      url: '/Eliminar'
+    },
+    {
+      title: 'Ver Productos',
+      url: '/VerProd'
     }
   ];
