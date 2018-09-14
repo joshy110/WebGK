@@ -20,6 +20,15 @@
     display: inline-block;
     padding-right: 10px;
   }
+  .Items{
+    color: white;
+    text-decoration: none;
+  }
+  .Items:hover{
+    color: black;
+    background-color: #E5D808;
+    text-decoration: none;
+  }
 
   @keyframes App-logo-spin {
     from { transform: rotate(0deg); }

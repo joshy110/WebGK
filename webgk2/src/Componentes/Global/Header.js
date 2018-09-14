@@ -1,7 +1,11 @@
+//Dependencias
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+//Estilos y Componentes
 import logo from './Imagenes/LogoBall.svg';
 import './css/Header.css';
-import Proptypes from 'prop-types';
 
  class Header extends Component {
   //Objeto PropTipes
@@ -19,7 +23,11 @@ import Proptypes from 'prop-types';
           <img src={logo} alt="logo" />
           <h2>{title}</h2>
           <ul>
-            { items && items.map((item,key) => <li className="Lista" key={key}>{item.title}</li>)}
+            { 
+              items && items.map(
+                (item,key) => <li className="Lista" key={key}><Link className="Items" to={item.url}>{item.title}</Link></li>
+              )
+            }
           </ul>
         </header>
       </div>
