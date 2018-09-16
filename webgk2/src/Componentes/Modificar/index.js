@@ -5,98 +5,101 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 class Modificar extends Component {
+        //Formulario Controlado
+        constructor(props) {
+            super(props);
+            this.idco = {value: ''};
+            this.idcr = {value: ''};
+            this.nombre = {value: ''};
+            this.talla = {value: ''};
+            this.costo = {value: ''};
+            this.desc = {value: ''};
+        
+            this.ManejadorCambioCr = this.ManejadorCambioCr.bind(this);
+            this.ManejadorModif = this.ManejadorModif.bind(this);
+            this.ConsultarModif = this.ConsultarModif.bind(this);
+          }
+        
+          ManejadorCambioCr(event) {
+            this.setState({value: event.target.value});
+          }
+        
+          ManejadorModif(event) {
+            alert('Se modifico el producto:'+ '\n' + this.idcr.value + '\n'+ this.nombre.value +'\n'+ this.talla.value + '\n' + this.costo.value + '\n' + this.desc.value);
+            event.preventDefault();
+          }
+    
+          ConsultarModif(event) {
+            alert('Se consulta el producto:' + '\n' + + this.idco.value + '\n' + 'Producto existente');
+            event.preventDefault();
+          }
     render() {
         return(
             <div className="Modificar">
-                 <label>
-                    IdProducto: <input type="text" name="Identificador" id="idPro" />
-                </label>
-                <div>
-                    <input type="submit" class="colorbtn" value="Consultar Producto" />
-                </div>
+            <h1 className="labelP"> Modificaion de Productos </h1>
+                 <form onSubmit={this.ConsultarModif}>
+                    <label>
+                        IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idco.value = '12345'} readOnly />
+                    </label>
+                    <div>
+                        <input type="submit" className="colorbtn" value="Consultar Producto" />
+                    </div>
+                    <br />
+                </form>
                 <br/>
                 <br/>
-                <Table>
-                    <Thead>
+                <Table border="1">
+                    <Thead> 
                         <Tr>
                             <Th>Id Producto</Th>
-                            <Th>Imagen</Th>
                             <Th>Nombre</Th>
                             <Th>Talla</Th>
                             <Th>Cotso</Th>
+                            <Th>Descripcion</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         <Tr>
-                            <Td>31</Td>
-                            <Td>2017</Td>
-                            <Td>Alabama Community College System (ACCS)</Td>
-                            <Td>Mr. Toner Evans, Samford University</Td>
-                            <Td>Ms. Kelly Birchfield, Auburn University Montgomery</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>30</Td>
-                            <Td>2016</Td>
-                            <Td>Samford University</Td>
-                            <Td>Ms. Angel Jowers, University of West Alabama</Td>
-                            <Td>Mr. Toner Evans, Samford University</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>29</Td>
-                            <Td>2015</Td>
-                            <Td>Eufaula (Wallace Community College Dothan)</Td>
-                            <Td>Dr. Annette Cederholm, Snead State Community College</Td>
-                            <Td>Ms. Angel Jowers, University of West Alabama</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>28</Td>
-                            <Td>2014</Td>
-                            <Td>Huntsville (J.F. Drake State Community and Technical College)</Td>
-                            <Td>Dr. Jon C. Acker, The University of Alabama</Td>
-                            <Td>Dr. Annette Cederholm, Snead State Community College</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>27</Td>
-                            <Td>2013</Td>
-                            <Td>The University of Alabama</Td>
-                            <Td>Mr. John McIntosh, Northwest-Shoals Community College</Td>
-                            <Td>Dr. Jon C. Acker, The University of Alabama</Td>
+                            <Td>12345</Td>
+                            <Td>Rinat F150</Td>
+                            <Td>10</Td>
+                            <Td>315</Td>
+                            <Td>Es color negro con tiras amarillentas</Td>
                         </Tr>
                     </Tbody>
-                </Table>                
-                <br/>
-                <br/>
-
-                <div>
-                    <input type="submit" class="colorbtn" value="Consultar Producto" />
-                </div>
+                </Table>             
                 <br />
                 <br />
-                <label >
-                    Imagen: <input type="file" name="Imagen" id="imgPro"  />
-                </label>
-                <br />
-                <br />
-                <label >
-                    Nombre: <input type="text" name="Nombre" id="nombrePro"  />
-                </label>
-                <br />
-                <br />
-                <label >
-                    Talla: <input type="text" name="Talla" id="tallaPro" />
-                </label>
-                <br />
-                <br />
-                <label >
-                    Costo: <input type="text" name="Costo" id="costoPro" />
-                </label>
-
-                <br/>
-                <br/>
-
-                <div>
-                    <input type="submit" class="colorbtn" value="Modificar Producto" />
-                </div>
+                <form onSubmit={this.ManejadorModif}>
+                    <div>
+                        <label>
+                            IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idcr.value = '12345'} readOnly />
+                        </label>
+                        <br />
+                        <br />
+                        <label >
+                            Nombre: <input type="text" name="Nombre" id="nombrePro" value={this.nombre.value = 'Rinat F150'} readOnly />
+                        </label>
+                        <br />
+                        <br />
+                        <label >
+                            Talla: <input type="text" name="Talla" id="tallaPro" value={this.talla.value = '10'} readOnly />
+                        </label>
+                        <br />
+                        <br />
+                        <label >
+                            Costo: <input type="text" name="Costo" id="costoPro" value={this.costo.value = '315'} readOnly />
+                        </label>
+                        <br />
+                        <br />
+                        <label >
+                            Descripcion: <textarea type="textarea" name="Descripcion" id="descPro" value={this.desc.value = 'Es color negro con tiras amarillentas'} readOnly />
+                        </label>
+                    </div>
+                    <div>
+                        <input type="submit" className="colorbtn" value="Modificar Producto" />
+                    </div>
+                </form>
             </div>
         );
     }

@@ -4,73 +4,104 @@ import React, { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
+
+import {Col} from 'react-bootstrap';
+import {FormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap';
+
+
 class Eliminar extends Component {
+
+    //Formulario Controlado
+    constructor(props) {
+        super(props);
+        this.idco = { value: '' };
+        this.idcr = { value: '' };
+        this.nombre = { value: '' };
+        this.talla = { value: '' };
+        this.costo = { value: '' };
+        this.desc = { value: '' };
+
+        this.ManejadorCambioCr = this.ManejadorCambioCr.bind(this);
+        this.ManejadorElimi = this.ManejadorElimi.bind(this);
+        this.ConsultaElimi = this.ConsultaElimi.bind(this);
+    }
+
+    ManejadorCambioCr(event) {
+        this.setState({ value: event.target.value });
+    }
+
+    ManejadorElimi(event) {
+        alert('Producto Eliminado');
+        event.preventDefault();
+    }
+
+    ConsultaElimi(event) {
+        alert('Se consulta el producto:' + '\n' + + this.idco.value + '\n' + 'Producto existente');
+        event.preventDefault();
+    }
+
     render() {
+          var cel = {
+            "name": "Iphone X",
+            "panta": 6.1,
+            "memo": "64GB y 256GB",
+            "bat": "3000mhA",
+            "ram": "2GB"
+        }
+        var celJSON = JSON.stringify(cel);
+        localStorage.setItem("game", celJSON);
+        
+        
+        var celJSON = JSON.stringify(cel);
+        localStorage.setItem("game", celJSON);
+
+        var celJSON = localStorage.getItem("game");
+        var game = JSON.parse(celJSON)
+
         return(
             <div className="Eliminar">
-            <div>
-                <label>
-                    IdProducto: <input type="text" name="Identificador" id="idPro" />
-                </label>
+                <h1 className="labelP"> Eliminacio de Productos </h1>
                 <div>
-                    <input type="submit" class="colorbtn" value="Consultar Producto" />
+                    <form onSubmit={this.ConsultaElimi}>
+                        <label>
+                            IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idco.value = '12345'} readOnly />
+                        </label>
+                        <div>
+                            <input type="submit" className="colorbtn" value="Consultar Producto" />
+                        </div>
+                        <br />
+                    </form>
+                    <br />
+                    <br/>
+                    <Table border="1">
+                        <Thead>
+                            <Tr>
+                                <Th>Id Producto</Th>
+                                <Th>Nombre</Th>
+                                <Th>Talla</Th>
+                                <Th>Cotso</Th>
+                                <Th>Descripcion</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            <Tr>
+                                <Td>12345</Td>
+                                <Td>Rinat F150</Td>
+                                <Td>10</Td>
+                                <Td>315</Td>
+                                <Td>Es color negro con tiras amarillentas</Td>
+                            </Tr>
+                        </Tbody>
+                    </Table>
+                    <br />
+                    <br />
+                    <form onSubmit={this.ManejadorElimi}>
+                        <div>
+                            <input type="submit" className="colorbtn" value="Eliminar Producto" />
+                        </div>
+                        <br />
+                    </form>
                 </div>
-                <br/>
-                <br/>
-                <Table>
-                    <Thead>
-                        <Tr>
-                            <Th>Id Producto</Th>
-                            <Th>Imagen</Th>
-                            <Th>Nombre</Th>
-                            <Th>Talla</Th>
-                            <Th>Cotso</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        <Tr>
-                            <Td>31</Td>
-                            <Td>2017</Td>
-                            <Td>Alabama Community College System (ACCS)</Td>
-                            <Td>Mr. Toner Evans, Samford University</Td>
-                            <Td>Ms. Kelly Birchfield, Auburn University Montgomery</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>30</Td>
-                            <Td>2016</Td>
-                            <Td>Samford University</Td>
-                            <Td>Ms. Angel Jowers, University of West Alabama</Td>
-                            <Td>Mr. Toner Evans, Samford University</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>29</Td>
-                            <Td>2015</Td>
-                            <Td>Eufaula (Wallace Community College Dothan)</Td>
-                            <Td>Dr. Annette Cederholm, Snead State Community College</Td>
-                            <Td>Ms. Angel Jowers, University of West Alabama</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>28</Td>
-                            <Td>2014</Td>
-                            <Td>Huntsville (J.F. Drake State Community and Technical College)</Td>
-                            <Td>Dr. Jon C. Acker, The University of Alabama</Td>
-                            <Td>Dr. Annette Cederholm, Snead State Community College</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>27</Td>
-                            <Td>2013</Td>
-                            <Td>The University of Alabama</Td>
-                            <Td>Mr. John McIntosh, Northwest-Shoals Community College</Td>
-                            <Td>Dr. Jon C. Acker, The University of Alabama</Td>
-                        </Tr>
-                    </Tbody>
-                </Table>                
-                <br/>
-                <br/>
-                <div>
-                    <input type="submit" class="colorbtn" value="Eliminar Producto" />
-                </div>
-            </div>
             </div>
         );
     }

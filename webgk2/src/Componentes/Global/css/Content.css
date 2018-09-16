@@ -8,3 +8,19 @@
     background-color:black;
     color: white;
 }
+
+.labelP {
+  background-color: #E5D808;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #000203;
+  font-style: oblique;
+  font-size: 18px;
+  border-bottom-left-radius: 2em;
+  border-top-left-radius: 2em;
+  border-bottom-right-radius: 2em;
+  border-top-right-radius: 2em;
+  border: 1px solid #000203;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 10px;
+}
