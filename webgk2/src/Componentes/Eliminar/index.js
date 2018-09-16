@@ -41,22 +41,6 @@ class Eliminar extends Component {
     }
 
     render() {
-          var cel = {
-            "name": "Iphone X",
-            "panta": 6.1,
-            "memo": "64GB y 256GB",
-            "bat": "3000mhA",
-            "ram": "2GB"
-        }
-        var celJSON = JSON.stringify(cel);
-        localStorage.setItem("game", celJSON);
-        
-        
-        var celJSON = JSON.stringify(cel);
-        localStorage.setItem("game", celJSON);
-
-        var celJSON = localStorage.getItem("game");
-        var game = JSON.parse(celJSON)
 
         return(
             <div className="Eliminar">
