@@ -4,19 +4,19 @@ import React, { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
-var cel = {
-    "name": "Iphone X",
-    "panta": 6.1,
-    "memo": "64GB y 256GB",
-    "bat": "3000mhA",
-    "ram": "2GB"
+var guante = {
+    "id": "12345",
+    "nombre": "Rinat F150",
+    "talla": "10",
+    "Costo": "315",
+    "Descripcion": "Prubea"
 }
-var celJSON = JSON.stringify(cel);
-localStorage.setItem("game", celJSON);
+var guanteJSON = JSON.stringify(guante);
+localStorage.setItem("game", guanteJSON);
 
 
-var celJSON = JSON.stringify(cel);
-localStorage.setItem("game", celJSON);
+var guanteJSON = JSON.stringify(guante);
+localStorage.setItem("game", guanteJSON);
 /*
 
 //Despues del render colocar
