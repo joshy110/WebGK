@@ -16,7 +16,7 @@ class Eliminar extends Component {
         super(props);
         //Lista
         this.state = {
-            gklist: []
+            gkprodu: []
         };  
     
         this.ManejadorCambioEli = this.ManejadorCambioEli.bind(this);
@@ -55,7 +55,7 @@ class Eliminar extends Component {
                                 <Th>Id Producto</Th>
                                 <Th>Nombre</Th>
                                 <Th>Talla</Th>
-                                <Th>Cotso</Th>
+                                <Th>Costo</Th>
                                 <Th>Descripcion</Th>
                             </Tr>
                         </Thead>

@@ -4,20 +4,6 @@ import React, { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
-//Se envia la data al localstorage
-var guante = {
-    "id": "1",
-    "nombre": "Rinat F150",
-    "talla": "10",
-    "Costo": "315",
-    "Descripcion": "Prubea"
-}
-var guanteJSON = JSON.stringify(guante);
-localStorage.setItem("GKApp", guanteJSON);
-
-//Se optiene la data
-var producto = localStorage.getItem("GKApp");
-var GKArreglo = JSON.parse(producto);
 
 class Crear extends Component {
 
@@ -50,30 +36,14 @@ class Crear extends Component {
             }
             else{
                 localStorage.setItem("GKApp", JSON.stringify([
-                    {id: this.state.idPro, nombre: "Rinat F150", talla: "10", costo: "315", Descripcion: "Prueba"}
+                    {idG: 1, nombre: "Rinat F150", talla: "10", costo: "315", Descripcion: "Prueba1"},
+                    {idG: 2, nombre: "Rinat F130", talla: "9", costo: "215", Descripcion: "Prueba2"},
+                    {idG: 3, nombre: "Rinat F140", talla: "8", costo: "715", Descripcion: "Prueba3"},
+                    {idG: 4, nombre: "Rinat F160", talla: "7", costo: "415", Descripcion: "Prueba4"}
                 ]));
                 tempo = JSON.parse(localStorage.getItem("GKApp"));
             }
             this.setState({gkprodu:tempo});
-      }
-
-      addItem() {
-        // create a new item
-        const objGuante = {
-          id: this.state.idPro, nombre: "Rinat F150", talla: "10", costo: "315", Descripcion: "Prueba"
-        };
-    
-        // copy current list of items
-        const list = [...this.state.list];
-    
-        // add the new item to the list
-        list.push(objGuante);
-    
-        // update state with new list, reset the new item input
-        this.setState({
-          list,
-          objGuante: ""
-        });
       }
     
 

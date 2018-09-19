@@ -10,7 +10,7 @@ class Modificar extends Component {
         super(props);
         //Lista
         this.state = {
-            gklist: []
+            gkprodu: []
         };  
     
         this.ManejadorCambioMod = this.ManejadorCambioMod.bind(this);

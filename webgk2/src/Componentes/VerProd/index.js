@@ -4,13 +4,36 @@ import React, { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
+
+var producto = localStorage.getItem("GKApp");
+var GKArreglo = JSON.parse(producto);
+
 class VerProd extends Component {
 
-    componentWillMount(){
-        
+    constructor(props) {
+        super(props);
+        //Lista
+        this.state = {
+            gklist: []
+        };
+    }
+
+    componentDidMount() {//load the local storage data after the component renders
+        var lista = []
+
+        if (typeof localStorage["Heroes"] !== "undefined") {
+            lista = JSON.parse(localStorage.getItem("Heroes"));
+        }
+        else {
+
+            lista = JSON.parse(localStorage.getItem("GKApp"));
+        }
+
+        this.setState({ gklist: lista });
     }
 
     render() {
+        const Guantes = this.state.gklist;
         return(
             <div className="VerProd">
              <h1 className="labelP"> Listado de Productos </h1>
@@ -28,18 +51,35 @@ class VerProd extends Component {
                             <Th>Id Producto</Th>
                             <Th>Nombre</Th>
                             <Th>Talla</Th>
-                            <Th>Cotso</Th>
+                            <Th>Costo</Th>
                             <Th>Descripcion</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>12345</Td>
-                            <Td>Rinat F150</Td>
-                            <Td>10</Td>
-                            <Td>315</Td>
-                            <Td>Es color negro con tiras amarillentas</Td>
-                        </Tr>
+
+                        {Guantes.map((Guantes, idG) => (
+                            <tr key={idG}>
+                                <td>
+                                    {Guantes.idG}
+                                </td>
+                                <td>
+                                    {Guantes.nombre}
+                                </td>
+                                <td>
+                                    {Guantes.talla}
+                                </td>
+                                <td>
+                                    {Guantes.costo}
+                                </td>
+                                <td>
+                                    {Guantes.Descripcion}
+                                </td>
+                            </tr>
+
+                        ))}
+
+
+
                     </Tbody>
                 </Table>
             </div>
