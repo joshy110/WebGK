@@ -10,7 +10,7 @@ class Modificar extends Component {
         super(props);
         //Lista
         this.state = {
-            heroList: []
+            gklist: []
         };  
     
         this.ManejadorCambioMod = this.ManejadorCambioMod.bind(this);

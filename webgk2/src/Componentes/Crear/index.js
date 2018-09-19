@@ -26,7 +26,7 @@ class Crear extends Component {
         super(props);
         //Lista
         this.state = {
-            heroList: []
+            gklist: []
         };  
     
         this.ManejadorCambioCr = this.ManejadorCambioCr.bind(this);
@@ -56,6 +56,26 @@ class Crear extends Component {
             }
             this.setState({gkprodu:tempo});
       }
+
+      addItem() {
+        // create a new item
+        const objGuante = {
+          id: this.state.idPro, nombre: "Rinat F150", talla: "10", costo: "315", Descripcion: "Prueba"
+        };
+    
+        // copy current list of items
+        const list = [...this.state.list];
+    
+        // add the new item to the list
+        list.push(objGuante);
+    
+        // update state with new list, reset the new item input
+        this.setState({
+          list,
+          objGuante: ""
+        });
+      }
+    
 
     render() {
         return (

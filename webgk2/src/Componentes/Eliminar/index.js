@@ -16,7 +16,7 @@ class Eliminar extends Component {
         super(props);
         //Lista
         this.state = {
-            heroList: []
+            gklist: []
         };  
     
         this.ManejadorCambioEli = this.ManejadorCambioEli.bind(this);
