@@ -15,6 +15,7 @@ class Modificar extends Component {
     
         this.ManejadorCambioMod = this.ManejadorCambioMod.bind(this);
         this.ManejadorModi = this.ManejadorModi.bind(this);
+        this.ConsultarModif = this.ConsultarModif.bind(this);
       }
     
       ManejadorCambioMod(event) {
@@ -25,13 +26,19 @@ class Modificar extends Component {
         alert('Se creo el producto:'+ '\n' + this.state.idProm + '\n'+ this.state.nombrePro +'\n'+ this.state.tallaPro + '\n' +this.state.costoPro + '\n' + this.state.descPro);
         event.preventDefault();
       }
+
+      ConsultarModif(event){
+        alert('Producto:' + this.state.idProm + " Encontrado");
+        event.preventDefault();
+      }
+
     render() {
         return(
             <div className="Modificar">
             <h1 className="labelP"> Modificaion de Productos </h1>
                  <form onSubmit={this.ConsultarModif}>
                     <label>
-                        IdProducto: <input type="text" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.idPro} />
+                        IdProducto: <input type="text" name="Identificador" id="idProm" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.idPro} />
                     </label>
                     <div>
                         <input type="submit" className="colorbtn" value="Consultar Producto" />
@@ -64,11 +71,6 @@ class Modificar extends Component {
                 <br />
                 <form onSubmit={this.ManejadorModif}>
                     <div>
-                        <label>
-                            IdProducto: <input type="text" name="Identificador" id="idProm" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.idProm} />
-                        </label>
-                        <br />
-                        <br />
                         <label >
                             Nombre: <input type="text" name="Nombre" id="nombrePro" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.nombrePro} />
                         </label>
@@ -89,7 +91,7 @@ class Modificar extends Component {
                         </label>
                     </div>
                     <div>
-                        <input type="submit" className="colorbtn" value="Crear Producto" />
+                        <input type="submit" className="colorbtn" value="Modificar Producto" />
                     </div>
                 </form>
             </div>
