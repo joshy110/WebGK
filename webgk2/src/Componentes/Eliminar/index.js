@@ -14,31 +14,23 @@ class Eliminar extends Component {
     //Formulario Controlado
     constructor(props) {
         super(props);
-        this.idco = { value: '' };
-        this.idcr = { value: '' };
-        this.nombre = { value: '' };
-        this.talla = { value: '' };
-        this.costo = { value: '' };
-        this.desc = { value: '' };
-
-        this.ManejadorCambioCr = this.ManejadorCambioCr.bind(this);
-        this.ManejadorElimi = this.ManejadorElimi.bind(this);
-        this.ConsultaElimi = this.ConsultaElimi.bind(this);
-    }
-
-    ManejadorCambioCr(event) {
-        this.setState({ value: event.target.value });
-    }
-
-    ManejadorElimi(event) {
-        alert('Producto Eliminado');
+        //Lista
+        this.state = {
+            heroList: []
+        };  
+    
+        this.ManejadorCambioEli = this.ManejadorCambioEli.bind(this);
+        this.ManejadorEliminar = this.ManejadorEliminar.bind(this);
+      }
+    
+      ManejadorCambioEli(event) {
+        this.setState({[event.target.id]: event.target.value});
+      }
+    
+      ManejadorEliminar(event) {
+        alert('Se creo el producto:'+ '\n' + this.state.idProm + '\n'+ this.state.nombrePro +'\n'+ this.state.tallaPro + '\n' +this.state.costoPro + '\n' + this.state.descPro);
         event.preventDefault();
-    }
-
-    ConsultaElimi(event) {
-        alert('Se consulta el producto:' + '\n' + + this.idco.value + '\n' + 'Producto existente');
-        event.preventDefault();
-    }
+      }
 
     render() {
 
@@ -46,9 +38,9 @@ class Eliminar extends Component {
             <div className="Eliminar">
                 <h1 className="labelP"> Eliminacio de Productos </h1>
                 <div>
-                    <form onSubmit={this.ConsultaElimi}>
+                    <form onSubmit={this.ConsultarModif}>
                         <label>
-                            IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idco.value = '12345'} readOnly />
+                            IdProducto: <input type="text" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioEli(event)} value={this.state.idPro} />
                         </label>
                         <div>
                             <input type="submit" className="colorbtn" value="Consultar Producto" />

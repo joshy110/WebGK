@@ -4,55 +4,57 @@ import React, { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
+//Se envia la data al localstorage
 var guante = {
-    "id": "12345",
+    "id": "1",
     "nombre": "Rinat F150",
     "talla": "10",
     "Costo": "315",
     "Descripcion": "Prubea"
 }
 var guanteJSON = JSON.stringify(guante);
-localStorage.setItem("game", guanteJSON);
+localStorage.setItem("GKApp", guanteJSON);
 
-
-var guanteJSON = JSON.stringify(guante);
-localStorage.setItem("game", guanteJSON);
-/*
-
-//Despues del render colocar
-var celJSON = localStorage.getItem("game");
-    var game = JSON.parse(celJSON)
-        */
+//Se optiene la data
+var producto = localStorage.getItem("GKApp");
+var GKArreglo = JSON.parse(producto);
 
 class Crear extends Component {
 
     //Formulario Controlado
     constructor(props) {
         super(props);
-        this.idco = {value: ''};
-        this.idcr = {value: ''};
-        this.nombre = {value: ''};
-        this.talla = {value: ''};
-        this.costo = {value: ''};
-        this.desc = {value: ''};
+        //Lista
+        this.state = {
+            heroList: []
+        };  
     
         this.ManejadorCambioCr = this.ManejadorCambioCr.bind(this);
         this.ManejadorCrear = this.ManejadorCrear.bind(this);
-        this.ConsultorCreacion = this.ConsultorCreacion.bind(this);
       }
     
       ManejadorCambioCr(event) {
-        this.setState({value: event.target.value});
+        this.setState({[event.target.id]: event.target.value});
       }
     
       ManejadorCrear(event) {
-        alert('Se creo el producto:'+ '\n' + this.idcr.value + '\n'+ this.nombre.value +'\n'+ this.talla.value + '\n' + this.costo.value + '\n' + this.desc.value);
+        alert('Se creo el producto:'+ '\n' + this.state.idPro + '\n'+ this.state.nombrePro +'\n'+ this.state.tallaPro + '\n' +this.state.costoPro + '\n' + this.state.descPro);
         event.preventDefault();
       }
 
-      ConsultorCreacion(event) {
-        alert('Se consulta el producto:' + '\n' + + this.idco.value + '\n' + 'Producto no existe, Cree uno nuevo');
-        event.preventDefault();
+      componentDidMount(){
+            var tempo = [];
+
+            if (typeof localStorage["GKApp"] !== "undefined"){
+                tempo = JSON.parse(localStorage.getItem("GKApp"));
+            }
+            else{
+                localStorage.setItem("GKApp", JSON.stringify([
+                    {id: this.state.idPro, nombre: "Rinat F150", talla: "10", costo: "315", Descripcion: "Prueba"}
+                ]));
+                tempo = JSON.parse(localStorage.getItem("GKApp"));
+            }
+            this.setState({gkprodu:tempo});
       }
 
     render() {
@@ -60,42 +62,31 @@ class Crear extends Component {
             <div >
 
                 <h1 className="labelP"> Creacion de Productos </h1>
-                <form onSubmit={this.ConsultorCreacion}>
-                    <label>
-                        IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idco.value = '12345'} readOnly />
-                    </label>
-                    <div>
-                        <input type="submit" className="colorbtn" value="Consultar Producto" />
-                    </div>
-                    <br />
-                </form>
-
-
 
                 <form onSubmit={this.ManejadorCrear}>
                     <div>
                         <label>
-                            IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idcr.value = '12345'} readOnly />
+                            IdProducto: <input type="text" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.idPro}  />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Nombre: <input type="text" name="Nombre" id="nombrePro" value={this.nombre.value = 'Rinat F150'} readOnly />
+                            Nombre: <input type="text" name="Nombre" id="nombrePro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.nombrePro}  />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Talla: <input type="text" name="Talla" id="tallaPro" value={this.talla.value = '10'} readOnly />
+                            Talla: <input type="text" name="Talla" id="tallaPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.tallaPro}  />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Costo: <input type="text" name="Costo" id="costoPro" value={this.costo.value = '315'} readOnly />
+                            Costo: <input type="text" name="Costo" id="costoPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.costoPro} />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Descripcion: <textarea type="textarea" name="Descripcion" id="descPro" value={this.desc.value = 'Es color negro con tiras amarillentas'} readOnly />
+                            Descripcion: <textarea type="textarea" name="Descripcion" id="descPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.descPro} />
                         </label>
                     </div>
                     <div>
@@ -103,27 +94,6 @@ class Crear extends Component {
                     </div>
                 </form>
                 <br/>
-                <Table border="1">
-                    <Thead>
-                        <Tr>
-                            <Th>Id Producto</Th>
-                            <Th>Nombre</Th>
-                            <Th>Talla</Th>
-                            <Th>Cotso</Th>
-                            <Th>Descripcion</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        <Tr>
-                            <Td>12345</Td>
-                            <Td>Rinat F150</Td>
-                            <Td>10</Td>
-                            <Td>315</Td>
-                            <Td>Es color negro con tiras amarillentas</Td>
-                        </Tr>
-                    </Tbody>
-                </Table>
-
             </div>
         );
     }

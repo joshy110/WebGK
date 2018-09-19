@@ -5,41 +5,33 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 class Modificar extends Component {
-        //Formulario Controlado
-        constructor(props) {
-            super(props);
-            this.idco = {value: ''};
-            this.idcr = {value: ''};
-            this.nombre = {value: ''};
-            this.talla = {value: ''};
-            this.costo = {value: ''};
-            this.desc = {value: ''};
-        
-            this.ManejadorCambioCr = this.ManejadorCambioCr.bind(this);
-            this.ManejadorModif = this.ManejadorModif.bind(this);
-            this.ConsultarModif = this.ConsultarModif.bind(this);
-          }
-        
-          ManejadorCambioCr(event) {
-            this.setState({value: event.target.value});
-          }
-        
-          ManejadorModif(event) {
-            alert('Se modifico el producto:'+ '\n' + this.idcr.value + '\n'+ this.nombre.value +'\n'+ this.talla.value + '\n' + this.costo.value + '\n' + this.desc.value);
-            event.preventDefault();
-          }
+    //Formulario Controlado
+    constructor(props) {
+        super(props);
+        //Lista
+        this.state = {
+            heroList: []
+        };  
     
-          ConsultarModif(event) {
-            alert('Se consulta el producto:' + '\n' + + this.idco.value + '\n' + 'Producto existente');
-            event.preventDefault();
-          }
+        this.ManejadorCambioMod = this.ManejadorCambioMod.bind(this);
+        this.ManejadorModi = this.ManejadorModi.bind(this);
+      }
+    
+      ManejadorCambioMod(event) {
+        this.setState({[event.target.id]: event.target.value});
+      }
+    
+      ManejadorModi(event) {
+        alert('Se creo el producto:'+ '\n' + this.state.idProm + '\n'+ this.state.nombrePro +'\n'+ this.state.tallaPro + '\n' +this.state.costoPro + '\n' + this.state.descPro);
+        event.preventDefault();
+      }
     render() {
         return(
             <div className="Modificar">
             <h1 className="labelP"> Modificaion de Productos </h1>
                  <form onSubmit={this.ConsultarModif}>
                     <label>
-                        IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idco.value = '12345'} readOnly />
+                        IdProducto: <input type="text" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.idPro} />
                     </label>
                     <div>
                         <input type="submit" className="colorbtn" value="Consultar Producto" />
@@ -73,31 +65,31 @@ class Modificar extends Component {
                 <form onSubmit={this.ManejadorModif}>
                     <div>
                         <label>
-                            IdProducto: <input type="text" name="Identificador" id="idPro" value={this.idcr.value = '12345'} readOnly />
+                            IdProducto: <input type="text" name="Identificador" id="idProm" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.idProm} />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Nombre: <input type="text" name="Nombre" id="nombrePro" value={this.nombre.value = 'Rinat F150'} readOnly />
+                            Nombre: <input type="text" name="Nombre" id="nombrePro" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.nombrePro} />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Talla: <input type="text" name="Talla" id="tallaPro" value={this.talla.value = '10'} readOnly />
+                            Talla: <input type="text" name="Talla" id="tallaPro" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.tallaPro} />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Costo: <input type="text" name="Costo" id="costoPro" value={this.costo.value = '315'} readOnly />
+                            Costo: <input type="text" name="Costo" id="costoPro" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.costoPro} />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Descripcion: <textarea type="textarea" name="Descripcion" id="descPro" value={this.desc.value = 'Es color negro con tiras amarillentas'} readOnly />
+                            Descripcion: <textarea type="textarea" name="Descripcion" id="descPro" onChange={(event) => this.ManejadorCambioMod(event)} value={this.state.descPro} />
                         </label>
                     </div>
                     <div>
-                        <input type="submit" className="colorbtn" value="Modificar Producto" />
+                        <input type="submit" className="colorbtn" value="Crear Producto" />
                     </div>
                 </form>
             </div>
