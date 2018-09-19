@@ -61,7 +61,7 @@ class Eliminar extends Component {
                         </Thead>
                         <Tbody>
                             <Tr>
-                                <Td>12345</Td>
+                                <Td>1</Td>
                                 <Td>Rinat F150</Td>
                                 <Td>10</Td>
                                 <Td>315</Td>
