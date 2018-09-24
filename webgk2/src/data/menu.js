@@ -12,10 +12,6 @@ export default [
       url: '/modif'
     },
     {
-      title: 'Eliminar',
-      url: '/elimi'
-    },
-    {
       title: 'Ver Productos',
       url: '/verpr'
     }

@@ -24,28 +24,44 @@ class Crear extends Component {
       }
     
       ManejadorCrear(event) {
-        alert('Se creo el producto:'+ '\n' + this.state.idPro + '\n'+ this.state.nombrePro +'\n'+ this.state.tallaPro + '\n' +this.state.costoPro + '\n' + this.state.descPro);
+        var idG = this.state.idPro;
+        var nombre = this.state.nombrePro;
+        var talla = this.state.tallaPro;
+        var costo = this.state.costoPro;
+        var Descripcion = this.state.descPro;
+
+        /*Se procede a agregar al local storage:
+        1. Se realiza el json
+        2. Se lee el local storage
+        3. Se valida si trae algo o no
+        4. Si trae algo se decodifica, si no trae nada se crea la lista
+        5. Se agrega el elemnto al principio de la lista
+        6. Se codifica la cadena
+        7. Se agrega al local Storage
+        8. Se notifica que se creo el producto*/
+        var producto = {
+            idG: idG,
+            nombre: nombre,
+            talla: talla,
+            costo: costo,
+            Descripcion: Descripcion,
+        }
+
+        var productos = localStorage.getItem('GKApp');
+
+        if (productos === null) {
+            productos = [];
+        }
+        else {
+            productos = JSON.parse(productos);
+        }
+
+        productos.unshift(producto);
+        productos = JSON.stringify(productos);
+        localStorage.setItem('GKApp', productos);
+        alert('Se creo el producto:' + '\n' + idG + '\n' + nombre + '\n' + talla + '\n' + costo + '\n' + Descripcion);
         event.preventDefault();
       }
-
-      componentDidMount(){
-            var tempo = [];
-
-            if (typeof localStorage["GKApp"] !== "undefined"){
-                tempo = JSON.parse(localStorage.getItem("GKApp"));
-            }
-            else{
-                localStorage.setItem("GKApp", JSON.stringify([
-                    {idG: 1, nombre: "Rinat F150", talla: "10", costo: "315", Descripcion: "Prueba1"},
-                    {idG: 2, nombre: "Rinat F130", talla: "9", costo: "215", Descripcion: "Prueba2"},
-                    {idG: 3, nombre: "Rinat F140", talla: "8", costo: "715", Descripcion: "Prueba3"},
-                    {idG: 4, nombre: "Rinat F160", talla: "7", costo: "415", Descripcion: "Prueba4"}
-                ]));
-                tempo = JSON.parse(localStorage.getItem("GKApp"));
-            }
-            this.setState({gkprodu:tempo});
-      }
-    
 
     render() {
         return (

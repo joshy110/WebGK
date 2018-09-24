@@ -16,13 +16,41 @@ class VerProd extends Component {
         this.state = {
             gklist: []
         };
+
+        this.ManejadorCambioVP = this.ManejadorCambioVP.bind(this);
+        this.ManejadorEliminar = this.ManejadorEliminar.bind(this);
     }
 
-    componentDidMount() {//load the local storage data after the component renders
-        var lista = []
+    ManejadorCambioVP(event) {
+        this.setState({[event.target.id]: event.target.value});
+      }
 
-        if (typeof localStorage["Heroes"] !== "undefined") {
-            lista = JSON.parse(localStorage.getItem("Heroes"));
+     ManejadorEliminar(event) {
+         //Se elimina el dato del localstorage del ID ingresado
+        debugger;
+        var idG = this.state.idPro;
+        var lista = [];
+        lista = JSON.parse(localStorage.getItem("GKApp"));
+
+        for(var i = 0; i < lista.length; i++){
+
+            if(lista[i].idG === idG){
+                lista.splice(i,idG);
+                //alert('Se creo el producto:' + '\n' + lista[i].idG + '\n' + lista[i].nombre + '\n' + lista[i].talla + '\n' + lista[i].costo + '\n' + lista[i].Descripcion);
+                break;
+            }
+        }
+        lista = JSON.stringify(lista);
+        localStorage.setItem('GKApp', lista);
+        this.setState({ gklist: lista });
+        event.preventDefault();
+      }
+
+     componentDidMount() {//load the local storage data after the component renders
+        var lista = [];
+
+        if (typeof localStorage["GKApp"] !== "undefined") {
+            lista = JSON.parse(localStorage.getItem("GKApp"));
         }
         else {
 
@@ -30,7 +58,7 @@ class VerProd extends Component {
         }
 
         this.setState({ gklist: lista });
-    }
+     }
 
     render() {
         const Guantes = this.state.gklist;
@@ -38,10 +66,11 @@ class VerProd extends Component {
             <div className="VerProd">
              <h1 className="labelP"> Listado de Productos </h1>
                  <label>
-                    IdProducto: <input type="text" name="Identificador" id="idPro" />
+                    Identificar del Producto: <input type="text" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioVP(event)} value={this.state.idPro}/>
                 </label>
                 <div>
                     <input type="submit" className="colorbtn" value="Buscar Producto" />
+                    <input type="submit" className="colorbtn" value="Eliminar Producto" onClick={this.ManejadorEliminar} />
                 </div>
                 <br/>
                 <br/>
@@ -53,6 +82,7 @@ class VerProd extends Component {
                             <Th>Talla</Th>
                             <Th>Costo</Th>
                             <Th>Descripcion</Th>
+                            <Th></Th> 
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -74,12 +104,13 @@ class VerProd extends Component {
                                 <td>
                                     {Guantes.Descripcion}
                                 </td>
+                                <td>
+                                    <input type="submit" className="colorbtn" value="Modificar Producto" />
+                                </td>
+
                             </tr>
 
                         ))}
-
-
-
                     </Tbody>
                 </Table>
             </div>
