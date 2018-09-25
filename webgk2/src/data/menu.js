@@ -8,10 +8,6 @@ export default [
       url: '/crear'
     },
     {
-      title: 'Modificar',
-      url: '/modif'
-    },
-    {
       title: 'Ver Productos',
       url: '/verpr'
     }

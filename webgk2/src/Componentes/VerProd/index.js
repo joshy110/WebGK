@@ -5,8 +5,6 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 
-var producto = localStorage.getItem("GKApp");
-var GKArreglo = JSON.parse(producto);
 
 class VerProd extends Component {
 
@@ -21,6 +19,7 @@ class VerProd extends Component {
         this.ManejadorEliminar = this.ManejadorEliminar.bind(this);
     }
 
+/*--------------------------- ELIMINAR -----------------------------------------------*/
     //Funcion que maneja los cambios de eventos
     //-----------------------------------------
     ManejadorCambioVP(event) {
@@ -44,7 +43,7 @@ class VerProd extends Component {
                 lista1.push(lista[i]);
             }
         }
-        
+
         //Se parsea la lista y se agrega nuevamente al local storage
         lista1 = JSON.stringify(lista1);
         localStorage.setItem('GKApp', lista1);
@@ -58,6 +57,13 @@ class VerProd extends Component {
         }
         event.preventDefault();
       }
+/*-------------------------------------------------------------------------------*/
+/*------------------------------ Modificar --------------------------------------*/
+    updateInput(key, value) {
+        // update react state
+        this.setState({ [key]: value });
+    }
+/*-------------------------------------------------------------------------------*/
 
     //Funcion que maneja la visualizacion de productos
     //-----------------------------------------

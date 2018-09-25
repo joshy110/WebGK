@@ -6,7 +6,6 @@ import { Route,Switch } from 'react-router-dom';
 import App from './Componentes/App';
 import Home from './Componentes/Home';
 import Crear from './Componentes/Crear';
-import Modificar from './Componentes/Modificar';
 import VerProd from './Componentes/VerProd';
 import Page404 from './Componentes/Page404';
 
@@ -16,7 +15,6 @@ const AppRoutes = () =>
 <App>
     <Switch>
         <Route path="/crear" component={Crear} />
-        <Route path="/modif" component={Modificar} />
         <Route path="/verpr" component={VerProd} />
         <Route path="/" component={Home} />
         <Route  component={Page404} />
