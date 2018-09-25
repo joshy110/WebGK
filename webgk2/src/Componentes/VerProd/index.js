@@ -21,31 +21,46 @@ class VerProd extends Component {
         this.ManejadorEliminar = this.ManejadorEliminar.bind(this);
     }
 
+    //Funcion que maneja los cambios de eventos
+    //-----------------------------------------
     ManejadorCambioVP(event) {
         this.setState({[event.target.id]: event.target.value});
       }
 
+      //Funcion que realiza la eliminacion
+      //-----------------------------------
      ManejadorEliminar(event) {
          //Se elimina el dato del localstorage del ID ingresado
         debugger;
         var idG = this.state.idPro;
         var lista = [];
+        var lista1 = [];
+        var lista2 = [];
         lista = JSON.parse(localStorage.getItem("GKApp"));
 
         for(var i = 0; i < lista.length; i++){
 
-            if(lista[i].idG === idG){
-                lista.splice(i,idG);
-                //alert('Se creo el producto:' + '\n' + lista[i].idG + '\n' + lista[i].nombre + '\n' + lista[i].talla + '\n' + lista[i].costo + '\n' + lista[i].Descripcion);
-                break;
+            if(lista[i].idG !== idG){
+                lista1.push(lista[i]);
             }
         }
-        lista = JSON.stringify(lista);
-        localStorage.setItem('GKApp', lista);
-        this.setState({ gklist: lista });
+        
+        //Se parsea la lista y se agrega nuevamente al local storage
+        lista1 = JSON.stringify(lista1);
+        localStorage.setItem('GKApp', lista1);
+        lista2 = JSON.parse(localStorage.getItem("GKApp"));
+        //Se verifica que la lista se encuentre llena
+        if(lista2.length === 0){
+            alert('No existen productos');
+        }
+        else{
+            this.setState({ gklist: lista2 });
+        }
         event.preventDefault();
       }
 
+    //Funcion que maneja la visualizacion de productos
+    //-----------------------------------------
      componentDidMount() {//load the local storage data after the component renders
         var lista = [];
 

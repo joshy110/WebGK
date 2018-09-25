@@ -18,11 +18,15 @@ class Crear extends Component {
         this.ManejadorCambioCr = this.ManejadorCambioCr.bind(this);
         this.ManejadorCrear = this.ManejadorCrear.bind(this);
       }
-    
+
+      //Funcion Manejadora de los eventos
+      //----------------------------------------------
       ManejadorCambioCr(event) {
         this.setState({[event.target.id]: event.target.value});
       }
     
+      //Funcion Manejadora de la creacion del producto
+      //----------------------------------------------
       ManejadorCrear(event) {
         var idG = this.state.idPro;
         var nombre = this.state.nombrePro;
@@ -56,7 +60,7 @@ class Crear extends Component {
             productos = JSON.parse(productos);
         }
 
-        productos.unshift(producto);
+        productos.push(producto);
         productos = JSON.stringify(productos);
         localStorage.setItem('GKApp', productos);
         alert('Se creo el producto:' + '\n' + idG + '\n' + nombre + '\n' + talla + '\n' + costo + '\n' + Descripcion);
