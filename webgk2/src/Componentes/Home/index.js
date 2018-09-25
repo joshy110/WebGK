@@ -13,11 +13,6 @@ class Home extends Component {
                 <h2 className="textoPImagenP">
                     <span className="labelP">"Si no hubiera sido futbolista habría sido peor persona" - Gianguili Buffon</span>
                 </h2>
-                <div>
-                    <p className="TextoInicio">
-                        Nosotros somos una organización que surge en el año 2018 con el objetivo de informar a todas aquellas personas que tienen poco conocimiento lo que conlleva ser portero, los sacrificios que se hacen y los arduos entrenamientos que se llevan a cabo pero sobre todo lo bien que se la pasa siendo portero.
-                    </p>
-                </div>
             </div>
         );
     }

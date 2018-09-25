@@ -28,34 +28,39 @@ class VerProd extends Component {
 
       //Funcion que realiza la eliminacion
       //-----------------------------------
-     ManejadorEliminar(event) {
+     ManejadorEliminar(event,id) {
+
          //Se elimina el dato del localstorage del ID ingresado
-        debugger;
-        var idG = this.state.idPro;
-        var lista = [];
-        var lista1 = [];
-        var lista2 = [];
-        lista = JSON.parse(localStorage.getItem("GKApp"));
+        // var idG = this.state.idPro;
+         var lista = [];
+         var lista1 = [];
+         var lista2 = [];
+         if (id > 0) {
 
-        for(var i = 0; i < lista.length; i++){
+             lista = JSON.parse(localStorage.getItem("GKApp"));
+             for (var i = 0; i < lista.length; i++) {
 
-            if(lista[i].idG !== idG){
-                lista1.push(lista[i]);
-            }
-        }
+                 if (lista[i].idG !== id) {
+                     lista1.push(lista[i]);
+                 }
+             }
 
-        //Se parsea la lista y se agrega nuevamente al local storage
-        lista1 = JSON.stringify(lista1);
-        localStorage.setItem('GKApp', lista1);
-        lista2 = JSON.parse(localStorage.getItem("GKApp"));
-        //Se verifica que la lista se encuentre llena
-        if(lista2.length === 0){
-            alert('No existen productos');
-        }
-        else{
-            this.setState({ gklist: lista2 });
-        }
-        event.preventDefault();
+             //Se parsea la lista y se agrega nuevamente al local storage
+             lista1 = JSON.stringify(lista1);
+             localStorage.setItem('GKApp', lista1);
+             lista2 = JSON.parse(localStorage.getItem("GKApp"));
+             //Se verifica que la lista se encuentre llena
+             if (lista2.length === 0) {
+                 alert('No existen productos');
+             }
+             else {
+                 this.setState({ gklist: lista2 });
+             }
+             event.preventDefault();
+         }
+         else{
+            alert('Ingrese un identificador valido');
+         }
       }
 /*-------------------------------------------------------------------------------*/
 /*------------------------------ Modificar --------------------------------------*/
@@ -86,15 +91,6 @@ class VerProd extends Component {
         return(
             <div className="VerProd">
              <h1 className="labelP"> Listado de Productos </h1>
-                 <label>
-                    Identificar del Producto: <input type="text" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioVP(event)} value={this.state.idPro}/>
-                </label>
-                <div>
-                    <input type="submit" className="colorbtn" value="Buscar Producto" />
-                    <input type="submit" className="colorbtn" value="Eliminar Producto" onClick={this.ManejadorEliminar} />
-                </div>
-                <br/>
-                <br/>
                 <Table  border="1">
                     <Thead>
                         <Tr>
@@ -103,6 +99,7 @@ class VerProd extends Component {
                             <Th>Talla</Th>
                             <Th>Costo</Th>
                             <Th>Descripcion</Th>
+                            <Th></Th> 
                             <Th></Th> 
                         </Tr>
                     </Thead>
@@ -128,7 +125,9 @@ class VerProd extends Component {
                                 <td>
                                     <input type="submit" className="colorbtn" value="Modificar Producto" />
                                 </td>
-
+                                <td>
+                                    <input type="submit" className="colorbtn" value="Eliminar Producto" onClick={(event) => this.ManejadorEliminar(event,Guantes.idG)} />
+                                </td>
                             </tr>
 
                         ))}

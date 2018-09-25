@@ -33,38 +33,52 @@ class Crear extends Component {
         var talla = this.state.tallaPro;
         var costo = this.state.costoPro;
         var Descripcion = this.state.descPro;
+        var lista1 = [];
 
-        /*Se procede a agregar al local storage:
-        1. Se realiza el json
-        2. Se lee el local storage
-        3. Se valida si trae algo o no
-        4. Si trae algo se decodifica, si no trae nada se crea la lista
-        5. Se agrega el elemnto al principio de la lista
-        6. Se codifica la cadena
-        7. Se agrega al local Storage
-        8. Se notifica que se creo el producto*/
-        var producto = {
-            idG: idG,
-            nombre: nombre,
-            talla: talla,
-            costo: costo,
-            Descripcion: Descripcion,
-        }
+          if (idG > 0 && talla > 0 && costo > 0) {
+              /*Se procede a agregar al local storage:
+              1. Se realiza el json
+              2. Se lee el local storage
+              3. Se valida si trae algo o no
+              4. Si trae algo se decodifica, si no trae nada se crea la lista
+              5. Se agrega el elemnto al principio de la lista
+              6. Se codifica la cadena
+              7. Se agrega al local Storage
+              8. Se notifica que se creo el producto*/
+              var producto = {
+                  idG: idG,
+                  nombre: nombre,
+                  talla: talla,
+                  costo: costo,
+                  Descripcion: Descripcion,
+              }
 
-        var productos = localStorage.getItem('GKApp');
+              var productos = localStorage.getItem('GKApp');
 
-        if (productos === null) {
-            productos = [];
-        }
-        else {
-            productos = JSON.parse(productos);
-        }
+              if (productos === null) {
+                  productos = [];
+              }
+              else {
+                  productos = JSON.parse(productos);
+              }
 
-        productos.push(producto);
-        productos = JSON.stringify(productos);
-        localStorage.setItem('GKApp', productos);
-        alert('Se creo el producto:' + '\n' + idG + '\n' + nombre + '\n' + talla + '\n' + costo + '\n' + Descripcion);
-        event.preventDefault();
+              debugger;
+              lista1 = JSON.stringify(productos);
+
+              if (lista1.includes(idG)) {
+                  alert('Producto:' + '\n' + idG + '\n' + nombre + '\n' + talla + '\n' + costo + '\n' + Descripcion + '\n' + ' ya existe');
+              }
+              else {
+                  productos.push(producto);
+                  productos = JSON.stringify(productos);
+                  localStorage.setItem('GKApp', productos);
+                  alert('Se creo el producto:' + '\n' + idG + '\n' + nombre + '\n' + talla + '\n' + costo + '\n' + Descripcion);
+              }
+              event.preventDefault();
+          }
+          else{
+            alert('Se debe ingresar un identificador positivo');
+          }
       }
 
     render() {
@@ -76,7 +90,7 @@ class Crear extends Component {
                 <form onSubmit={this.ManejadorCrear}>
                     <div>
                         <label>
-                            IdProducto: <input type="text" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.idPro}  />
+                            ID Producto: <input type="number"  maxLength="6" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.idPro}  />
                         </label>
                         <br />
                         <br />
@@ -86,12 +100,12 @@ class Crear extends Component {
                         <br />
                         <br />
                         <label >
-                            Talla: <input type="text" name="Talla" id="tallaPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.tallaPro}  />
+                            Talla: <input type="number" name="Talla" id="tallaPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.tallaPro}  />
                         </label>
                         <br />
                         <br />
                         <label >
-                            Costo: <input type="text" name="Costo" id="costoPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.costoPro} />
+                            Costo: <input type="number" name="Costo" id="costoPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.costoPro} />
                         </label>
                         <br />
                         <br />
