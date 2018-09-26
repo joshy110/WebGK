@@ -72,8 +72,8 @@ class VerProd extends Component {
         this.state.tallaPro = talla;
         this.state.costoPro= costo;
         this.state.descPro = desc;
-    }/*
-    GuardarActualizar(event, id, nombre, talla, costo, desc){
+    }
+    GuardarActualizar(id, nombre, talla, costo, desc){
         var lista = [];
         var lista1 = [];
         var lista2 = [];
@@ -102,7 +102,7 @@ class VerProd extends Component {
             this.setState({ gklist: lista2 });
         }
          //event.preventDefault();
-    }*/
+    }
 /*-------------------------------------------------------------------------------*/
 
     //Funcion que maneja la visualizacion de productos
@@ -127,7 +127,7 @@ class VerProd extends Component {
             <div className="VerProd">
              <h1 className="labelP"> Listado de Productos </h1>
              
-                <form>
+                <form onSubmit={this.GuardarActualizar}>
                     <div>
                         <label>
                             ID Producto: <input type="number" maxLength="6" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.idPro} disabled/>
