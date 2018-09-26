@@ -77,7 +77,7 @@ class Crear extends Component {
               event.preventDefault();
           }
           else{
-            alert('Se debe ingresar un identificador positivo');
+            alert('Se debe ingresar un identificador valido y mayor a cero.');
           }
       }
 
