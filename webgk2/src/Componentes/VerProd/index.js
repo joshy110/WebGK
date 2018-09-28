@@ -72,6 +72,7 @@ class VerProd extends Component {
         this.state.tallaPro = talla;
         this.state.costoPro= costo;
         this.state.descPro = desc;
+        this.setState({[event.target.id]: event.target.value});
     }
     GuardarActualizar(event,idG){
         if (idG > 0) {
