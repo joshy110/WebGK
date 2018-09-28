@@ -19,7 +19,7 @@ class VerProd extends Component {
         this.ManejadorCambioVP = this.ManejadorCambioVP.bind(this);
         this.ManejadorEliminar = this.ManejadorEliminar.bind(this);
         this.ManejadorActualizar = this.ManejadorActualizar.bind(this);
-        //this.GuardarActualizar = this.GuardarActualizar.bind(this);
+        this.GuardarActualizar = this.GuardarActualizar.bind(this);
     }
 
         //Funcion que maneja los cambios de eventos
@@ -73,35 +73,49 @@ class VerProd extends Component {
         this.state.costoPro= costo;
         this.state.descPro = desc;
     }
-    GuardarActualizar(id, nombre, talla, costo, desc){
-        var lista = [];
-        var lista1 = [];
-        var lista2 = [];
+    GuardarActualizar(event,idG){
+        if (idG > 0) {
+            var id = idG;
+            var n = this.state.nombrePro;
+            var t = this.state.tallaPro;
+            var c = this.state.costoPro;
+            var d = this.state.descPro;
 
-        lista = JSON.parse(localStorage.getItem("GKApp"));
-
-       for (var i = 0; i < lista.length; i++) {
-
-            if (lista[i].idG === id) {
-                lista[i].nombre = nombre;
-                lista[i].talla = talla;
-                lista[i].costo = costo;
-                lista[i].Descripcion = desc;
+            var productos = {
+                idG: idG,
+                nombre: n,
+                talla: t,
+                costo: c,
+                Descripcion: d
             }
-            lista1.push(lista[i]);
-        }
+            var lista = [];
+            var lista1 = [];
+            var lista2 = [];
 
-        lista1 = JSON.stringify(lista1);
-        localStorage.setItem('GKApp', lista1);
-        lista2 = JSON.parse(localStorage.getItem("GKApp"));
-        //Se verifica que la lista se encuentre llena
-        if (lista2.length === 0) {
-            alert('No existen productos');
+            lista = JSON.parse(localStorage.getItem("GKApp"));
+
+            for (var i = 0; i < lista.length; i++) {
+                if (lista[i].idG === id) {
+                    lista[i] = productos;
+                }
+                lista1.push(lista[i]);
+            }
+
+            lista1 = JSON.stringify(lista1);
+            localStorage.setItem('GKApp', lista1);
+            lista2 = JSON.parse(localStorage.getItem("GKApp"));
+            //Se verifica que la lista se encuentre llena
+            if (lista2.length === 0) {
+                alert('No existen productos');
+            }
+            else {
+                this.setState({ gklist: lista2 });
+            }
+            event.preventDefault();
         }
-        else {
-            this.setState({ gklist: lista2 });
+        else{
+            alert('Ingrese un numero valido');
         }
-         //event.preventDefault();
     }
 /*-------------------------------------------------------------------------------*/
 
@@ -127,7 +141,7 @@ class VerProd extends Component {
             <div className="VerProd">
              <h1 className="labelP"> Listado de Productos </h1>
              
-                <form onSubmit={this.GuardarActualizar}>
+                <form>
                     <div>
                         <label>
                             ID Producto: <input type="number" maxLength="6" name="Identificador" id="idPro" onChange={(event) => this.ManejadorCambioCr(event)} value={this.state.idPro} disabled/>
@@ -148,7 +162,7 @@ class VerProd extends Component {
 
                     <br/>
                     <div>
-                        <input type="submit" className="colorbtn" value="Guardar Cambios" />
+                        <input type="submit" className="colorbtn" value="Guardar Cambios" onClick={(event) => this.GuardarActualizar(event,this.state.idPro)} />
                     </div>
                 </form>
                 <br/>
