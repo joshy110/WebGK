@@ -62,7 +62,6 @@ class Crear extends Component {
                   productos = JSON.parse(productos);
               }
 
-              debugger;
               lista1 = JSON.stringify(productos);
 
               if (lista1.includes(idG)) {
