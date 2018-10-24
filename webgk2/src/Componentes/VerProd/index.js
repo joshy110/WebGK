@@ -28,42 +28,16 @@ class VerProd extends Component {
         this.setState({[event.target.id]: event.target.value});
       }
 /*--------------------------- ELIMINAR -----------------------------------------------*/
-      //Funcion que realiza la eliminacion
-      //-----------------------------------
-      ManejadorEliminar(event,id) {
-
-        //Se elimina el dato del localstorage del ID ingresado
-       // var idG = this.state.idPro;
-        var lista = [];
-        var lista1 = [];
-        var lista2 = [];
-        if (id > 0) {
-
-            lista = JSON.parse(localStorage.getItem("GKApp"));
-            for (var i = 0; i < lista.length; i++) {
-
-                if (lista[i].idG !== id) {
-                    lista1.push(lista[i]);
-                }
-            }
-
-            //Se parsea la lista y se agrega nuevamente al local storage
-            lista1 = JSON.stringify(lista1);
-            localStorage.setItem('GKApp', lista1);
-            lista2 = JSON.parse(localStorage.getItem("GKApp"));
-            //Se verifica que la lista se encuentre llena
-            if (lista2.length === 0) {
-                alert('No existen productos');
-            }
-            else {
-                this.setState({ gklist: lista2 });
-            }
-            event.preventDefault();
-        }
-        else{
-           alert('Ingrese un identificador valido');
-        }
-     }
+    async ManejadorEliminar(id) {
+        const response = await fetch('http://localhost:3002/implementos', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({id:id})
+        });
+        this.componentDidMount();
+      }
 /*-------------------------------------------------------------------------------*/
 /*------------------------------ Modificar --------------------------------------*/
    ManejadorActualizar(event, id, nombre, talla, costo, desc) {
@@ -74,67 +48,50 @@ class VerProd extends Component {
         this.state.descPro = desc;
         this.setState({[event.target.id]: event.target.value});
     }
-    GuardarActualizar(event,idG){
-        if (idG > 0) {
-            var id = idG;
+
+    async GuardarActualizar(id) {
+        try {
+            var id = id;
             var n = this.state.nombrePro;
             var t = this.state.tallaPro;
             var c = this.state.costoPro;
             var d = this.state.descPro;
 
             var productos = {
-                idG: idG,
+                id: id,
                 nombre: n,
                 talla: t,
                 costo: c,
                 Descripcion: d
-            }
-            var lista = [];
-            var lista1 = [];
-            var lista2 = [];
+            };
 
-            lista = JSON.parse(localStorage.getItem("GKApp"));
-
-            for (var i = 0; i < lista.length; i++) {
-                if (lista[i].idG === id) {
-                    lista[i] = productos;
-                }
-                lista1.push(lista[i]);
-            }
-
-            lista1 = JSON.stringify(lista1);
-            localStorage.setItem('GKApp', lista1);
-            lista2 = JSON.parse(localStorage.getItem("GKApp"));
-            //Se verifica que la lista se encuentre llena
-            if (lista2.length === 0) {
-                alert('No existen productos');
-            }
-            else {
-                this.setState({ gklist: lista2 });
-            }
-            event.preventDefault();
+          const response = await fetch('http://localhost:3002/implementos', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productos)
+          });
+          this.componentDidMount();
+        } 
+        catch (error) {
+          console.log(error);
         }
-        else{
-            alert('Ingrese un numero valido');
-        }
-    }
+      }
 /*-------------------------------------------------------------------------------*/
 
-    //Funcion que maneja la visualizacion de productos
-    //-----------------------------------------
-     componentDidMount() {//load the local storage data after the component renders
-        var lista = [];
-
-        if (typeof localStorage["GKApp"] !== "undefined") {
-            lista = JSON.parse(localStorage.getItem("GKApp"));
+     /*------------------- GET ALL ------------------------------------------ */
+     async componentDidMount(){
+        try {
+          const response = await fetch('http://localhost:3002/implementos');
+          const lista = await response.json();
+          this.setState({ gklist: lista.implementosgk });
+        } 
+        catch (error) {
+          console.log(error);
         }
-        else {
-
-            lista = JSON.parse(localStorage.getItem("GKApp"));
-        }
-
-        this.setState({ gklist: lista });
-     }
+      }
+    /*--------------------------------------------------------- */
 
     render() {
         const Guantes = this.state.gklist;
@@ -163,7 +120,7 @@ class VerProd extends Component {
 
                     <br/>
                     <div>
-                        <input type="submit" className="colorbtn" value="Guardar Cambios" onClick={(event) => this.GuardarActualizar(event,this.state.idPro)} />
+                        <input type="submit" className="colorbtn" value="Guardar Cambios" onClick={() => this.GuardarActualizar(this.state.idPro)} />
                     </div>
                 </form>
                 <br/>
@@ -181,10 +138,10 @@ class VerProd extends Component {
                     </Thead>
                     <Tbody>
 
-                        {Guantes.map((Guantes, idG) => (
-                            <tr key={idG}>
+                        {Guantes.map((Guantes, id) => (
+                            <tr key={id}>
                                 <td>
-                                    {Guantes.idG}
+                                    {Guantes.id}
                                 </td>
                                 <td>
                                     {Guantes.nombre}
@@ -200,10 +157,10 @@ class VerProd extends Component {
                                 </td>
                                 <td>
                                     <input type="submit" className="colorbtn" value="Modificar Producto" 
-                                    onClick={(event) => this.ManejadorActualizar(event,Guantes.idG, Guantes.nombre, Guantes.talla, Guantes.costo, Guantes.Descripcion)} />
+                                    onClick={(event) => this.ManejadorActualizar(event,Guantes.id, Guantes.nombre, Guantes.talla, Guantes.costo, Guantes.Descripcion)} />
                                 </td>
                                 <td>
-                                    <input type="submit" className="colorbtn" value="Eliminar Producto" onClick={(event) => this.ManejadorEliminar(event,Guantes.idG)} />
+                                    <input type="submit" className="colorbtn" value="Eliminar Producto" onClick={(event) => this.ManejadorEliminar(Guantes.id)} />
                                 </td>
                             </tr>
 
