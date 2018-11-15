@@ -29,7 +29,7 @@ class VerProd extends Component {
       }
 /*--------------------------- ELIMINAR -----------------------------------------------*/
     async ManejadorEliminar(id) {
-        const response = await fetch('ec2-52-87-247-214.compute-1.amazonaws.com', {
+        const response = await fetch('http://localhost:3002/implementos', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
