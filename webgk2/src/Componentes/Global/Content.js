@@ -9,10 +9,6 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 
 class Content extends Component {
-  //Objeto PropTipes
-  static propTypes={
-    body: Proptypes.object.isRequired
-  };
 
   render() {
     return (

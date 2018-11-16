@@ -36,6 +36,7 @@ class VerProd extends Component {
           },
           body: JSON.stringify({id:id})
         });
+	alert("Registro Eliminado");
         this.componentDidMount();
       }
 /*-------------------------------------------------------------------------------*/

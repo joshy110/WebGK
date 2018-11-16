@@ -38,7 +38,7 @@ class Crear extends Component {
                 nombre: nombre,
                 talla: talla,
                 costo: costo,
-                Descripcion: Descripcion,
+                Descripcion: Descripcion
             };
 
             const response = await fetch('http://localhost:3002/implementos', {
@@ -54,7 +54,7 @@ class Crear extends Component {
             console.log(error);
         }
     }
-  
+
     
       //Funcion Manejadora de la creacion del producto
       //----------------------------------------------
