@@ -48,6 +48,7 @@ class Crear extends Component {
                 },
                 body: JSON.stringify(producto)
             });
+	    alert("Registro Creado");
             this.componentDidMount();
         }
         catch (error) {

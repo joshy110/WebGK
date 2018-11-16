@@ -73,6 +73,7 @@ class VerProd extends Component {
             },
             body: JSON.stringify(productos)
           });
+          alert("Registro Modificado");
           this.componentDidMount();
         } 
         catch (error) {
