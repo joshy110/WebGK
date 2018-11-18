@@ -41,7 +41,7 @@ class Crear extends Component {
                 Descripcion: Descripcion
             };
 
-            const response = await fetch('http://ec2-52-87-247-214.compute-1.amazonaws.com:3002/implementos', {
+            const response = await fetch('http://ec2-18-208-197-215.compute-1.amazonaws.com:3002/implementos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

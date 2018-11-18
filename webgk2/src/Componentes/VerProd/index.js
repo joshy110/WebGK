@@ -29,7 +29,7 @@ class VerProd extends Component {
       }
 /*--------------------------- ELIMINAR -----------------------------------------------*/
     async ManejadorEliminar(id) {
-        const response = await fetch('http://ec2-52-87-247-214.compute-1.amazonaws.com:3002/implementos', {
+        const response = await fetch('http://ec2-18-208-197-215.compute-1.amazonaws.com:3002/implementos', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ class VerProd extends Component {
                 Descripcion: d
             };
 
-          const response = await fetch('http://ec2-52-87-247-214.compute-1.amazonaws.com:3002/implementos', {
+          const response = await fetch('http://ec2-18-208-197-215.compute-1.amazonaws.com:3002/implementos', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ class VerProd extends Component {
      /*------------------- GET ALL ------------------------------------------ */
      async componentDidMount(){
         try {
-          const response = await fetch('http://ec2-52-87-247-214.compute-1.amazonaws.com:3002/implementos');
+          const response = await fetch('http://ec2-18-208-197-215.compute-1.amazonaws.com:3002/implementos');
           const lista = await response.json();
           this.setState({ gklist: lista.implementosgk });
         } 
