@@ -68,7 +68,7 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 
 * [REACT](https://reactjs.org/) - El framework web usado
 * [NodeJs](https://nodejs.org/en/) - Server
-* [MongoDB](https://mlab.com) - Entorno que posee la base de datos Mongo
+* [MongoDB](https://www.mongodb.com/) - Entorno que posee la base de datos Mongo
 * [Nginx](https://www.nginx.com/) - Entorno que posee el webserving
 * [Docker](https://www.docker.com/) - Entorno usado para crear imagenes y contendores
 * [AWS](https://aws.amazon.com/) - Entorno Web donde se montaron las imagenes creadas
