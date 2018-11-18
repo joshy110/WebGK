@@ -41,13 +41,14 @@ class Crear extends Component {
                 Descripcion: Descripcion
             };
 
-            const response = await fetch('http://localhost:3002/implementos', {
+            const response = await fetch('http://ec2-52-87-247-214.compute-1.amazonaws.com:3002/implementos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(producto)
             });
+	    alert("Registro Creado");
             this.componentDidMount();
         }
         catch (error) {
